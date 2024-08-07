@@ -1,0 +1,51 @@
+import React from "react";
+import { StyleSheet, Text, TouchableWithoutFeedback, Animated, View } from "react-native";
+
+export default function AnimatedButton({ onPress, action }) {
+    const opacity = useRef(new Animated.Value(1));
+
+    return (
+        <TouchableWithoutFeedback 
+            onPress={() => {
+                Animated.timing(opacityy.current, {
+                    toValue: 0.2,
+                    duration: 800,
+                    useNativeDriver: true,
+                }).start(() => onPress());
+            }}
+        >
+            <Animated.View 
+                style={[ 
+                    styles.button, 
+                    action === 'higher' ? styles.buttonGreen : 
+                    styles.buttonRed,
+                    { opacity: opacity.current },
+                ]}
+            >
+                <Text style={styles.buttonText}>{action}</Text>
+            </Animated.View>
+        </TouchableWithoutFeedback>
+    );
+}
+
+const styles = StyleSheet.create({
+    button: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around",
+        borderRadius: 15,
+        padding: 30,
+        marginVertical: 15,
+    },
+    buttonText: {
+        color: "white",
+        fontSize: 24,
+        textTransform: "capitalize",
+    },
+    buttonGreen: {
+        backgroundColor: "green",
+    },
+    buttonRed: {
+        backgroundColor: "red",
+    },
+});
